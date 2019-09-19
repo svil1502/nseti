@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Chat */
 
-$this->title = 'Create Chat';
-$this->params['breadcrumbs'][] = ['label' => 'Chats', 'url' => ['index']];
+$this->title = 'Добавить';
+$this->params['breadcrumbs'][] = ['label' => 'Чат с куратором', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="chat-create">

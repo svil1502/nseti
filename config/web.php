@@ -1,5 +1,7 @@
 <?php
 
+use kartik\datecontrol\Module;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -13,6 +15,39 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+            'layout' => 'admin',
+            'defaultRoute' => 'chat/index',
+        ],
+        'datecontrol' =>  [
+            'class' => 'kartik\datecontrol\Module',
+
+            // format settings for displaying each date attribute (ICU format example)
+            'displaySettings' => [
+                Module::FORMAT_DATE => 'dd-MM-yyyy',
+                //    Module::FORMAT_TIME => 'hh:mm:ss a',
+                //  Module::FORMAT_DATETIME => 'dd-MM-yyyy hh:mm:ss a',
+                //   dd-mm-Y H:i:s
+                // d.MM.yyyy H:mm:ss
+            ],
+
+            // format settings for saving each date attribute (PHP format example)
+            'saveSettings' => [
+                Module::FORMAT_DATE => 'php:U', // saves as unix timestamp
+                //    Module::FORMAT_TIME => 'php:H:i:s',
+                //     Module::FORMAT_DATETIME => 'php:Y-m-d H:i:s',
+            ],
+
+            // set your display timezone
+            'displayTimezone' => 'Europe/Moscow',
+
+            // set your timezone for date saved to db
+            'saveTimezone' => 'Europe/Moscow'
+        ],
+
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -20,6 +55,17 @@ $config = [
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+        ],
+        'formatter' => [
+
+            // 'nullDisplay' => 'нет данных',
+            'dateFormat' => 'd-M-Y',
+            'datetimeFormat' => 'd-M-Y H:i:s',
+            'timeFormat' => 'H:i:s',
+
+            'locale' => 'ru-RU', //your language locale
+
+            'defaultTimeZone' => 'Europe/Moscow', // time zone
         ],
         'user' => [
             'identityClass' => 'app\models\User',

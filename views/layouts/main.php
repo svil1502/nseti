@@ -39,9 +39,11 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Чат', 'url' => ['/chat/index']],
-            ['label' => 'Нейросети', 'url' => ['/neuro/about']],
-            ['label' => 'Python', 'url' => ['/python/contact']],
+            ['label' => 'Нейросети', 'url' => ['/nseti/index']],
+            ['label' => 'Python', 'url' => ['/python/index']],
+            ['label' => 'Вход', 'url' => ['/admin']],
 
+//https://coggle.it/diagram/XX9Q7LstyAa29wqG/t/python/3d202f71d37ef76077bea08e5b5c0b2080e59bead832d62dc72ce76e50d791fb
         ],
     ]);
     NavBar::end();
@@ -50,6 +52,7 @@ AppAsset::register($this);
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'homeLink' => false,
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>

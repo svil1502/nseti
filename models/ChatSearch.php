@@ -11,14 +11,19 @@ use app\models\Chat;
  */
 class ChatSearch extends Chat
 {
+    public $tagsAsString;
+    public $date_from;
+    public $date_to;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'description', 'type', 'params'], 'safe'],
+            [['id'], 'integer'],
+            [['date_from', 'date_to'], 'date', 'format' => 'dd.mm.yyyy'],
+            [['title', 'description', 'question', 'type', 'params'], 'safe'],
+            [['tagsAsString'], 'safe'],
         ];
     }
 
@@ -47,26 +52,58 @@ class ChatSearch extends Chat
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'params',
+                'description',
+                'question',
+                'type',
+                //   'files.tag',
+                //  'files.created_at',
 
+
+                'tagsAsString' => [
+                    'asc' => ['tag.name' => SORT_ASC],
+                    'desc' => ['tag.name' => SORT_DESC],
+                    'label' => 'Тэги'
+                ],
+                'created_at' => [
+                    'asc' => ['chat.created_at' => SORT_ASC],
+                    'desc' => ['chat.created_at' => SORT_DESC],
+                    'label' => 'Дата'
+                ],
+            ]
+        ]);
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
+            $query->joinWith(['tags']);
             return $dataProvider;
         }
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+            'chat.id' => $this->id,
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'type', $this->type])
-            ->andFilterWhere(['like', 'params', $this->params]);
+        ]);
+        $query->andFilterWhere(['like', 'chat.title', $this->title])
+            ->andFilterWhere(['like', 'chat.created_at', $this->created_at])
+            ->andFilterWhere(['like', 'chat.description', $this->description])
+            ->andFilterWhere(['like', 'chat.question', $this->description])
+            ->andFilterWhere(['like', 'chat.type', $this->type])
+            //  ->andFilterWhere(['like', 'files.file', $this->file])
+            ->andFilterWhere(['like', 'chat.params', $this->params])
+
+            ->andFilterWhere(['>=', 'created_at', $this->date_from ? strtotime($this->date_from.' 00:00:00') : null])
+            ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to.' 23:59:59') : null]);
+
+
+        $query->joinWith(['tags' => function ($q) {
+            $q->where('tag.name LIKE "%' . $this->tagsAsString . '%"');
+        }]);
 
         return $dataProvider;
     }
