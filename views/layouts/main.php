@@ -25,13 +25,13 @@ AppAsset::register($this);
     $this->registerLinkTag([
         'rel' => 'shortcut icon',
         'type' => 'image/x-icon',
-        'href' => 'favicon.ico',
+        'href' => '/nseti/web/favicon.ico',
     ]);
 
-    $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/favicon.png']);
+    $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/nseti/web/favicon.png']);
 
     ?>
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/nseti/web/favicon.ico">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
