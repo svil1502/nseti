@@ -21,12 +21,17 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
 
-    <?php $this->registerLinkTag([
+    <?php
+    $this->registerLinkTag([
         'rel' => 'shortcut icon',
         'type' => 'image/x-icon',
         'href' => 'favicon.ico',
-    ])
+    ]);
+
+    $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/favicon.png']);
+
     ?>
+    <link rel="shortcut icon" href="favicon.ico">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
