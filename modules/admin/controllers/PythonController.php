@@ -150,7 +150,9 @@ class PythonController extends Controller
     {
         $file = new Python();
         $model = $file->findOne($id);
-        unlink('uploads/files/'.$model->params);
+        if ($model->params) {
+            unlink('uploads/files/' . $model->params);
+        }
         $this->findModel($id)->delete();
 
 //unlink('/path/to/file');
