@@ -31,7 +31,7 @@ AppAsset::register($this);
     $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/favicon.png']);
 
     ?>
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
