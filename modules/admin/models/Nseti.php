@@ -84,7 +84,7 @@ class Nseti extends \yii\db\ActiveRecord
 
     public function getNtags()
     {
-        return $this->hasMany(NTag::className(), ['id' => 'tag_id'])->via('nsetiTag');
+        return $this->hasMany(Ntag::className(), ['id' => 'tag_id'])->via('nsetiTag');
     }
 
     public function getTagsAsString()
