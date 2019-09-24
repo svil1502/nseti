@@ -48,11 +48,11 @@ class Chat extends \yii\db\ActiveRecord
             //  [['created_at', 'updated_at'], 'date','format' => 'dd.mm.yyyy'],
             //'format' => 'dd.mm.yyyy'
             [['title'], 'string', 'max' => 500],
-            [['type', 'params'], 'string', 'max' => 255],
+            [['type', 'params'], 'string'],
             [['image'], 'safe'],
             [['image'], 'file', 'extensions'=>'jpg, gif, png, pdf'],
             [['image'], 'file', 'maxSize'=>'100000000'],
-            [['title', 'params'], 'string', 'max' => 255],
+            [['title', 'params'], 'string'],
             [['tags_array'], 'safe'],
         ];
     }
