@@ -2,9 +2,10 @@
 
 namespace app\models;
 
+use app\models\Chat;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Chat;
+
 
 /**
  * ChatSearch represents the model behind the search form of `app\models\Chat`.
@@ -92,7 +93,7 @@ class ChatSearch extends Chat
         $query->andFilterWhere(['like', 'chat.title', $this->title])
             ->andFilterWhere(['like', 'chat.created_at', $this->created_at])
             ->andFilterWhere(['like', 'chat.description', $this->description])
-            ->andFilterWhere(['like', 'chat.question', $this->description])
+            ->andFilterWhere(['like', 'chat.question', $this->question])
             ->andFilterWhere(['like', 'chat.type', $this->type])
             //  ->andFilterWhere(['like', 'files.file', $this->file])
             ->andFilterWhere(['like', 'chat.params', $this->params])

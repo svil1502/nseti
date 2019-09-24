@@ -139,13 +139,7 @@ class PythonController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDownload($file) {
 
-        if (file_exists($file)) {
-            return \Yii::$app->response->sendFile($file);
-        }
-        throw new \Exception('File not found');
-    }
     public function actionDelete($id)
     {
         $file = new Python();
@@ -171,7 +165,7 @@ class PythonController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Python::find()->with('tags')->andWhere(['id'=>$id])->one()) !== null) {
+        if (($model = Python::find()->with('ptags')->andWhere(['id'=>$id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

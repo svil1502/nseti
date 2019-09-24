@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Тэги', ['tag/'], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('Тэги', ['ptag/'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -66,37 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{confirm}',
-                'visibleButtons' => [
-                    'confirm' => true,
-                ],
-                'buttons' => [
-                    'confirm' => function ($dataProvider, $model) {
-
-                        return Html::a('', ['uploads/files/'.$model->params], ['class' => 'glyphicon glyphicon-zoom-in']);
-                    },
 
 
-                ],
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{confir}',
-                'visibleButtons' => [
-                    'confirm' => true,
-                ],
-                'buttons' => [
-
-
-                    'confir' => function ($dataProvider, $model) {
-
-                        return Html::a('', ['python/download', 'file'=>'uploads/files/'.$model->params], ['class' => 'glyphicon glyphicon-cloud-download']);
-
-                    },
-                ],
-            ],
         ],
     ]); ?>
 

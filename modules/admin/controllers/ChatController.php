@@ -139,13 +139,7 @@ class ChatController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDownload($file) {
 
-        if (file_exists($file)) {
-            return \Yii::$app->response->sendFile($file);
-        }
-        throw new \Exception('File not found');
-    }
     public function actionDelete($id)
     {
         $file = new Chat();

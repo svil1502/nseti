@@ -78,24 +78,24 @@ class nseti extends \yii\db\ActiveRecord
 
         ];
     }
-    public function getChatTag(){
-        return $this->hasMany(ChatTag::className(),['chat_id'=>'id']);
+    public function getNsetiTag(){
+        return $this->hasMany(NsetiTag::className(),['chat_id'=>'id']);
     }
 
-    public function getTags()
+    public function getNtags()
     {
-        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->via('chatTag');
+        return $this->hasMany(Ntag::className(), ['id' => 'tag_id'])->via('nsetiTag');
     }
 
     public function getTagsAsString()
     {
-        $arr = \yii\helpers\ArrayHelper::map($this->tags,'id','name');
+        $arr = \yii\helpers\ArrayHelper::map($this->ntags,'id','name');
         return implode(', ',$arr);
     }
     public function afterFind()
     {
         parent::afterFind();
-        $this->tags_array = $this->tags;
+        $this->tags_array = $this->ntags;
     }
 
 

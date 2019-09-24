@@ -4,7 +4,7 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\modules\admin\models\Nseti;
-use app\modules\admin\models\Tag;
+use app\modules\admin\models\Ntag;
 use app\modules\admin\models\NsetiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -139,13 +139,7 @@ class NsetiController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDownload($file) {
 
-        if (file_exists($file)) {
-            return \Yii::$app->response->sendFile($file);
-        }
-        throw new \Exception('File not found');
-    }
     public function actionDelete($id)
     {
         $file = new Nseti();
@@ -171,7 +165,7 @@ class NsetiController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Nseti::find()->with('tags')->andWhere(['id'=>$id])->one()) !== null) {
+        if (($model = Nseti::find()->with('ntags')->andWhere(['id'=>$id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

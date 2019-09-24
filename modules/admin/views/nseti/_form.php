@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Tag;
+use app\models\Ntag;
 use kartik\widgets\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
     ]);   ?>
 
     <?= $form->field($model, 'tags_array')->widget(\kartik\select2\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(Tag::find()->all(),'id','name'),
+        'data' => \yii\helpers\ArrayHelper::map(NTag::find()->all(),'id','name'),
         'language' => 'ru',
         'options' => ['placeholder' => 'Выбрать тэги ...', 'multiple' => true],
         'pluginOptions' => [

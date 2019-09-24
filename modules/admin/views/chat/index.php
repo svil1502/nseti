@@ -63,37 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{confirm}',
-                'visibleButtons' => [
-                    'confirm' => true,
-                ],
-                'buttons' => [
-                    'confirm' => function ($dataProvider, $model) {
 
-                        return Html::a('', ['uploads/files/'.$model->params], ['class' => 'glyphicon glyphicon-zoom-in']);
-                    },
-
-
-                ],
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{confir}',
-                'visibleButtons' => [
-                    'confirm' => true,
-                ],
-                'buttons' => [
-
-
-                    'confir' => function ($dataProvider, $model) {
-
-                        return Html::a('', ['chat/download', 'file'=>'uploads/files/'.$model->params], ['class' => 'glyphicon glyphicon-cloud-download']);
-
-                    },
-                ],
-            ],
         ],
     ]); ?>
 

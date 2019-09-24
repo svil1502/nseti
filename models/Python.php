@@ -78,35 +78,35 @@ class Python extends \yii\db\ActiveRecord
 
         ];
     }
-    public function getChatTag(){
-        return $this->hasMany(ChatTag::className(),['chat_id'=>'id']);
+    public function getPythonTag(){
+        return $this->hasMany(PythonTag::className(),['chat_id'=>'id']);
     }
 
-    public function getTags()
+    public function getPtags()
     {
-        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->via('chatTag');
+        return $this->hasMany(Ptag::className(), ['id' => 'tag_id'])->via('pythonTag');
     }
 
     public function getTagsAsString()
     {
-        $arr = \yii\helpers\ArrayHelper::map($this->tags,'id','name');
+        $arr = \yii\helpers\ArrayHelper::map($this->ptags,'id','name');
         return implode(', ',$arr);
     }
     public function afterFind()
     {
         parent::afterFind();
-        $this->tags_array = $this->tags;
+        $this->tags_array = $this->ptags;
     }
 
 
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
-        $arr = \yii\helpers\ArrayHelper::map($this->tags,'id','id');
+        $arr = \yii\helpers\ArrayHelper::map($this->ptags,'id','id');
         foreach ($this->tags_array as $one){
             if(!in_array($one,$arr)){
                 $model = new PythonTag();
-                $model->Python_id = $this->id;
+                $model->python_id = $this->id;
                 $model->tag_id = $one;
                 $model->save();
             }

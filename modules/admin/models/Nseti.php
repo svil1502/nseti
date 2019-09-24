@@ -6,7 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "chat".
+ * This is the model class for table "nseti".
  *
  * @property int $id
  * @property string $title Название
@@ -78,34 +78,34 @@ class Nseti extends \yii\db\ActiveRecord
 
         ];
     }
-    public function getChatTag(){
-        return $this->hasMany(ChatTag::className(),['chat_id'=>'id']);
+    public function getNsetiTag(){
+        return $this->hasMany(NsetiTag::className(),['chat_id'=>'id']);
     }
 
-    public function getTags()
+    public function getNtags()
     {
-        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->via('chatTag');
+        return $this->hasMany(NTag::className(), ['id' => 'tag_id'])->via('nsetiTag');
     }
 
     public function getTagsAsString()
     {
-        $arr = \yii\helpers\ArrayHelper::map($this->tags,'id','name');
+        $arr = \yii\helpers\ArrayHelper::map($this->ntags,'id','name');
         return implode(', ',$arr);
     }
     public function afterFind()
     {
         parent::afterFind();
-        $this->tags_array = $this->tags;
+        $this->tags_array = $this->ntags;
     }
 
 
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
-        $arr = \yii\helpers\ArrayHelper::map($this->tags,'id','id');
+        $arr = \yii\helpers\ArrayHelper::map($this->ntags,'id','id');
         foreach ($this->tags_array as $one){
             if(!in_array($one,$arr)){
-                $model = new ChatTag();
+                $model = new NsetiTag();
                 $model->chat_id = $this->id;
                 $model->tag_id = $one;
                 $model->save();
@@ -114,14 +114,14 @@ class Nseti extends \yii\db\ActiveRecord
                 unset($arr[$one]);
             }
         }
-        ChatTag::deleteAll(['tag_id'=>$arr]);
+        NsetiTag::deleteAll(['tag_id'=>$arr]);
     }
 
     public function beforeDelete()
     {
         if (parent::beforeDelete()) {
 
-            ChatTag::deleteAll(['chat_id'=>$this->id]);
+            NsetiTag::deleteAll(['chat_id'=>$this->id]);
             return true;
         } else {
             return false;

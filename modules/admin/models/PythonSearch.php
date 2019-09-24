@@ -64,8 +64,8 @@ class PythonSearch extends Python
 
 
                 'tagsAsString' => [
-                    'asc' => ['tag.name' => SORT_ASC],
-                    'desc' => ['tag.name' => SORT_DESC],
+                    'asc' => ['ptag.name' => SORT_ASC],
+                    'desc' => ['ptag.name' => SORT_DESC],
                     'label' => 'Тэги'
                 ],
                 'created_at' => [
@@ -80,7 +80,7 @@ class PythonSearch extends Python
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
-            $query->joinWith(['tags']);
+            $query->joinWith(['ptags']);
             return $dataProvider;
         }
 
@@ -101,8 +101,8 @@ class PythonSearch extends Python
             ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to.' 23:59:59') : null]);
 
 
-        $query->joinWith(['tags' => function ($q) {
-            $q->where('tag.name LIKE "%' . $this->tagsAsString . '%"');
+        $query->joinWith(['ptags' => function ($q) {
+            $q->where('ptag.name LIKE "%' . $this->tagsAsString . '%"');
         }]);
 
         return $dataProvider;

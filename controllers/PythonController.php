@@ -171,7 +171,7 @@ class PythonController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Python::find()->with('tags')->andWhere(['id'=>$id])->one()) !== null) {
+        if (($model = Python::find()->with('ptags')->andWhere(['id'=>$id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

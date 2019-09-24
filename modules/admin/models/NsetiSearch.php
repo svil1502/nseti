@@ -64,8 +64,8 @@ class NsetiSearch extends Nseti
 
 
                 'tagsAsString' => [
-                    'asc' => ['tag.name' => SORT_ASC],
-                    'desc' => ['tag.name' => SORT_DESC],
+                    'asc' => ['ntag.name' => SORT_ASC],
+                    'desc' => ['ntag.name' => SORT_DESC],
                     'label' => 'Тэги'
                 ],
                 'created_at' => [
@@ -80,7 +80,7 @@ class NsetiSearch extends Nseti
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
-            $query->joinWith(['tags']);
+            $query->joinWith(['ntags']);
             return $dataProvider;
         }
 
@@ -101,8 +101,8 @@ class NsetiSearch extends Nseti
             ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to.' 23:59:59') : null]);
 
 
-        $query->joinWith(['tags' => function ($q) {
-            $q->where('tag.name LIKE "%' . $this->tagsAsString . '%"');
+        $query->joinWith(['ntags' => function ($q) {
+            $q->where('ntag.name LIKE "%' . $this->tagsAsString . '%"');
         }]);
 
         return $dataProvider;
