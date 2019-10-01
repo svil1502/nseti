@@ -33,7 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'question:ntext',
+            [
+                'attribute' => 'question',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return \yii\helpers\StringHelper::truncate($model->question, 50, '...');
+
+                }
+            ],
             [
                 'attribute' => 'image',
                 'format' => 'raw',
