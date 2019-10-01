@@ -4,6 +4,7 @@ use app\models\Ntag;
 use kartik\widgets\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Nseti */
@@ -16,8 +17,29 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'question')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
+    <?php
+    echo $form->field($model, 'description')->widget(TinyMce::className(), [
+        'options' => ['rows' => 6],
+        'language' => 'ru',
+        'clientOptions' => [
+            'plugins' => [
+                'advlist autolink lists link charmap hr preview pagebreak',
+                'searchreplace wordcount textcolor visualblocks visualchars code fullscreen nonbreaking',
+                'save insertdatetime media table contextmenu template paste image responsivefilemanager filemanager',
+            ],
+            'toolbar' => 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | responsivefilemanager link image media',
+            'external_filemanager_path' => '/admin/plugins/responsivefilemanager/filemanager/',
+            'filemanager_title' => 'Responsive Filemanager',
+            'external_plugins' => [
+                //Иконка/кнопка загрузки файла в диалоге вставки изображения.
+                'filemanager' => '/admin/plugins/responsivefilemanager/filemanager/plugin.min.js',
+                //Иконка/кнопка загрузки файла в панеле иснструментов.
+                'responsivefilemanager' => '/admin/plugins/responsivefilemanager/tinymce/plugins/responsivefilemanager/plugin.min.js',
+            ],
+            'relative_urls' => false,
+        ]
+    ]);
+    ?>
     <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
 
 

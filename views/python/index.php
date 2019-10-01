@@ -40,7 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
           //  'title',
-            'description:ntext',
+            [
+                'attribute' => 'description',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return \yii\helpers\StringHelper::truncate($model->description, 50, '...');
+
+                }
+            ],
             'type',
           //  'params',
             [
