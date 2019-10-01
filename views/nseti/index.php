@@ -53,7 +53,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 }
             ],
-            'type',
+            [
+                'attribute' => 'type',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return \yii\helpers\StringHelper::truncate($model->type, 50, '...');
+
+                }
+            ],
           //  'params',
             [
                 'filter' => DatePicker::widget([
