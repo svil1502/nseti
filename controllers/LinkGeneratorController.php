@@ -2,8 +2,12 @@
 
 namespace app\controllers;
 
+
+
 use Yii;
 use app\models\LinkGenerator;
+use app\models\LinksArticlesRelations;
+use app\models\Articles as CompaniesAlias;
 use app\models\LinkGeneratorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,13 +69,19 @@ class LinkGeneratorController extends Controller
     public function actionCreate()
     {
         $model = new LinkGenerator();
-
+        $model2 = new LinksArticlesRelations();
+        $data_ = CompaniesAlias::find()->all();
+        foreach ($data_ as $value) {
+            $data[$value->id]=$value->title;
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'model2' => $model2,
+            'data' => $data,
         ]);
     }
 
