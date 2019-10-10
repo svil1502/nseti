@@ -22,6 +22,9 @@ $config = [
             'layout' => 'admin',
             'defaultRoute' => 'chat/index',
         ],
+
+        'gii' => 'yii\gii\Module',
+
         'datecontrol' =>  [
             'class' => 'kartik\datecontrol\Module',
 

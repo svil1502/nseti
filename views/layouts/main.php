@@ -50,6 +50,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+            ['label' => 'Генератор рассылок', 'url' => ['/link-generator/index']],
             ['label' => 'Чат', 'url' => ['/chat/index']],
             ['label' => 'Нейросети', 'url' => ['/nseti/index']],
             ['label' => 'Python', 'url' => ['/python/index']],
