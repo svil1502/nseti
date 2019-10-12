@@ -134,4 +134,21 @@ class LinkGeneratorController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionArticles($id)
+    {
+//        $model=  \app\models\Requisites::findOne($id);
+        $model=  \app\models\Articles::find()->where(['id'=>$id])->one();
+
+        return \yii\helpers\Json::encode([
+            'id'=>$model->id,
+            'title'=>$model->title,
+            'intro'=>$model->intro
+        ]);
+
+
+    }
 }
+
+
+
