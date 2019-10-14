@@ -20,19 +20,27 @@ use yii\web\JsExpression;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput() ?>
+    <?= $form->field($model, 'status')->textInput()->checkbox([ '0', '1', ]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'send_at')->textInput() ?>
+    <?=$form->field($model, 'send_at')->widget(DateControl::classname(), [
+        'type'=>DateControl::FORMAT_DATE,
+        'ajaxConversion'=>false,
+        'widgetOptions' => [
+            'pluginOptions' => [
+                'autoclose' => true
+            ]
+        ]
+    ]);
+    ?>
 
     <table class="table table-bordered" id="POITable" border="1">
         <tr>
-            <td>POI</td>
-            <td>Latitude</td>
-            <td>Longitude</td>
-            <td>Delete?
-            Add Rows?</td>
+            <td><?= Yii::t('app', '№') ?></td>
+            <td><?= Yii::t('app', 'Выбрать статью') ?></td>
+            <td><?= Yii::t('app', 'Наименование') ?></td>
+            <td><?= Yii::t('app', 'Лид для статьи') ?></td>
+            <td><?= Yii::t('app', 'Добавить/удалить') ?></td>
         </tr>
         <tr id = "line">
             <td id = "number">1</td>
@@ -60,7 +68,7 @@ use yii\web\JsExpression;
                                     data: {id: id},
                                     success: function (data, textStatus, jqXHR) {
                                     document.getElementById("linksarticlesrelations-title").value=data.title;
-                                  //  document.getElementById("linksarticlesrelations-intro").value=data.intro;
+                                    document.getElementById("linksarticlesrelations-intro").value=data.intro;
                                     },
                                     beforeSend: function (xhr) {
                                     },
@@ -75,6 +83,7 @@ use yii\web\JsExpression;
                     ],
                 ]); ?></td>
             <td><?= $form->field($model2, 'title')->textInput(); ?></td>
+            <td><?= $form->field($model2, 'intro')->textInput(); ?></td>
             <td><button type="button" class="btn btn-danger btn-lg" id="delPOIbutton"  onclick="deleteRow(this)" /><span class="glyphicon glyphicon-minus">
             <button type="button" class="btn btn-success btn-lg" id="addmorePOIbutton" onclick="insRow()" /><span class="glyphicon glyphicon-plus"></span></td>
         </tr>
@@ -95,16 +104,12 @@ use yii\web\JsExpression;
 <?php
 $formatJs = <<< 'JS'
 
-
-//document.getElementById('addmorePOIbutton').style.display = "block";
-//document.getElementById('delPOIbutton').style.display = "none";
 function deleteRow(row) {
    
   var i = row.parentNode.parentNode.rowIndex;
-   console.log(i);
+  
   document.getElementById('POITable').deleteRow(i);
- // document.getElementById('addmorePOIbutton').style.display = "block";
-  //document.getElementById('delPOIbutton').style.display = " ";
+ 
 }
 
 

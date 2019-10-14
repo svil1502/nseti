@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\LinkGeneratorSearch */
@@ -28,8 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title:ntext',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => function($data) {
+                    return !$data->status? '<span class="text-danger">Нет</span>' : '<span class="text-success">Да</span>';
+                },
+                'format' => 'html',
+            ],
             'send_at',
+
             //'created_at',
             //'updated_at',
             //'user_sent',
