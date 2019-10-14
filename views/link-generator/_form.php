@@ -81,11 +81,11 @@ use yii\web\JsExpression;
                                                 }'
 
                     ],
-                ]); ?></td>
-            <td><?= $form->field($model2, 'title')->textInput(); ?></td>
-            <td><?= $form->field($model2, 'intro')->textInput(); ?></td>
-            <td><button type="button" class="btn btn-danger btn-lg" id="delPOIbutton"  onclick="deleteRow(this)" /><span class="glyphicon glyphicon-minus">
-            <button type="button" class="btn btn-success btn-lg" id="addmorePOIbutton" onclick="insRow()" /><span class="glyphicon glyphicon-plus"></span></td>
+                ])->label(false); ?></td>
+            <td><?= $form->field($model2, 'title')->textInput()->label(false); ?></td>
+            <td><?= $form->field($model2, 'intro')->textInput()->label(false); ?></td>
+            <td><button type="button" class="btn btn-danger" id="delPOIbutton"  onclick="deleteRow(this)" /><span class="glyphicon glyphicon-minus">
+            <button type="button" class="btn btn-success" id="addmorePOIbutton" onclick="insRow()" /><span class="glyphicon glyphicon-plus"></span></td>
         </tr>
     </table>
 

@@ -116,6 +116,6 @@ a.desc:after {
 button#addmorePOIbutton {
     display: block;
 }
-button#delPOIbutton.btn.btn-danger.btn-lg {
+button#delPOIbutton {
     display: none;
 }
