@@ -113,3 +113,9 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+button#addmorePOIbutton {
+    display: block;
+}
+button#delPOIbutton.btn.btn-danger.btn-lg {
+    display: none;
+}

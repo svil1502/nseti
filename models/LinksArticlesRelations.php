@@ -30,7 +30,7 @@ class LinksArticlesRelations extends \yii\db\ActiveRecord
     {
         return [
             [['link_id', 'article_id'], 'integer'],
-            [['intro', 'title'], 'required'],
+           // [['intro', 'title'], 'required'],
             [['intro', 'title'], 'string'],
         ];
     }

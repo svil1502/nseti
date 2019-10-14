@@ -32,7 +32,7 @@ use yii\web\JsExpression;
             <td>Latitude</td>
             <td>Longitude</td>
             <td>Delete?
-            Add Rows?</td>
+                Add Rows?</td>
         </tr>
         <tr id = "line">
             <td id = "number">1</td>
@@ -96,35 +96,73 @@ use yii\web\JsExpression;
 $formatJs = <<< 'JS'
 
 
-//document.getElementById('addmorePOIbutton').style.display = "block";
-//document.getElementById('delPOIbutton').style.display = "none";
+
 function deleteRow(row) {
    
   var i = row.parentNode.parentNode.rowIndex;
    console.log(i);
   document.getElementById('POITable').deleteRow(i);
- // document.getElementById('addmorePOIbutton').style.display = "block";
+ // document.getElementById('addmorePOIbutton').style.display = "none";
   //document.getElementById('delPOIbutton').style.display = " ";
 }
 
+function hide_min(){
+   document.getElementById('delPOIbutton').style.visibility = 'hidden';
+  }
+  
+  function vis_min(){
+   document.getElementById('delPOIbutton').style.visibility = 'visible';
+  }
+  
+function hide_plus(){
+   document.getElementById('addmorePOIbutton').style.visibility = 'hidden';
+  }
 
+function vis_plus(){
+   document.getElementById('addmorePOIbutton').style.visibility = 'visible';
+  }
 function insRow() {
+    let cell = event.target;
+       let i2 = cell.parentNode.rowIndex;
+  let j = cell.cellIndex;
+    // var i = row.parentNode.parentNode.rowIndex;
+    vis_min();
 
+    // document.getElementById('delPOIbutton').style.display = "none";
+//document.getElementById('addmorePOIbutton').style.display = " ";
+
+  //console.log(i);
   var x = document.getElementById('POITable');
-document.getElementById('delPOIbutton').style.display = "block";
-document.getElementById('addmorePOIbutton').style.display = "none";
+  //var but_success = document.getElementById('addmorePOIbutton');
+  
+   console.log(i2, j);
+   function hide_plus(cell){
+   document.getElementById('addmorePOIbutton').style.visibility = 'hidden';
+  }
+  
  var new_row  = document.getElementById("line").cloneNode(true);
-document.getElementById('addmorePOIbutton').style.display = "block";
-document.getElementById('delPOIbutton').style.display = "none";
+ console.log(i2, j);
   var len = x.rows.length;
   new_row.cells[0].innerHTML = len;
-  x.appendChild(new_row);
- 
-}
+var new_number  = document.getElementById("number").innerHTML;
+  console.log(new_number);
+  
 
+//var new_row  = document.getElementById("line").cloneNode(true);
+  // var inp1 = new_row.cells[1].getElementsByTagName('select')[0];
+  // inp1.id += len;
+  // inp1.value = '';
+  // var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+  // inp2.id += len;
+  // inp2.value = '';
+  x.appendChild(new_row);
+  console.log(i2, j);
+}
+hide_min();
 
 
 
 JS;
 $this->registerJs($formatJs, \yii\web\View::POS_HEAD);
 ?>
+
