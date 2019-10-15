@@ -22,6 +22,13 @@ $config = [
             'layout' => 'admin',
             'defaultRoute' => 'chat/index',
         ],
+        'link-generator' => [
+            'class' => 'app\modules\linkGenerator\LinkGenerator',
+        //    'defaultRoute' => 'default/index',
+        ],
+        'mail-list' => [
+            'class' => 'app\modules\mailList\MailListModule',
+        ],
 
         'gii' => 'yii\gii\Module',
 

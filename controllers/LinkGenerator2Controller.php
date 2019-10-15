@@ -16,7 +16,7 @@ use yii\filters\VerbFilter;
 /**
  * LinkGeneratorController implements the CRUD actions for LinkGenerator model.
  */
-class LinkGeneratorController extends Controller
+class LinkGenerator2Controller extends Controller
 {
     /**
      * {@inheritdoc}

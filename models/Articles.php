@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\linkGenerator\models\LinksArticlesRelations;
 use Yii;
 
 /**
@@ -47,5 +48,10 @@ class Articles extends \yii\db\ActiveRecord
             'content' => 'Content',
             'category_id' => 'Category ID',
         ];
+    }
+
+    public function getLinksArticlesRelations()
+    {
+        return $this->hasMany(LinksArticlesRelations::class, ['article_id' => 'id']);
     }
 }
