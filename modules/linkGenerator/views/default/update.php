@@ -5,10 +5,10 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Обновить рассылку: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Рассылка', 'url' => ['index']];
+$this->title = 'Обновить рассылки: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Рассылки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="link-generator-update">
     <h1><?= Html::encode($this->title) ?></h1>

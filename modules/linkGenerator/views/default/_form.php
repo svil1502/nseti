@@ -11,7 +11,7 @@ use app\modules\linkGenerator\assets\Select2Asset;
 Select2Asset::register($this);
 
 // адрес для получения списка статей для select2 - ajax запрос
-$url_set = Url::to(['search-articles']);
+$url_set = Url::to(['search-article']);
 // адрес для получения строки таблицы при нажатии на плюс - ajax запрос
 $url_add = Url::to(['add-entry']);
 // адрес для получения значения соседних полей (title, intro), когда статься выбрана - ajax запрос
@@ -53,6 +53,7 @@ $js = "
                     $.post('$url_add_intro', {article_id: val}, function (data) {
                        titleField.val(data.title);
                        introField.val(data.intro);
+                       console.log(data);
                     });
                 }
             });
@@ -95,6 +96,7 @@ $this->registerJs($js, \yii\web\View::POS_END);
         <?php foreach ($entries as $entry) : ?>
             <?php $minus = $i == 0 ? false : true ?>
             <?= $this->render('_entry_form', ['entry' => $entry, 'minus' => $minus, 'id' => uniqid()]) ?>
+            <?= $this->render('_form_error', ['model' =>$entry, 'field' => 'intro']) ?>
             <?php $i++ ?>
         <?php endforeach ?>
     </table>
@@ -103,6 +105,3 @@ $this->registerJs($js, \yii\web\View::POS_END);
     </div>
     <?= Html::endForm() ?>
 </div>
-<?php
-
-?>

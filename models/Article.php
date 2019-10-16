@@ -3,7 +3,7 @@
 namespace app\models;
 
 
-use app\modules\mailList\models\MailingListEntry;
+use app\modules\mailList\models\LinksArticlesRelations;
 
 /**
  * This is the model class for table "articles".
@@ -30,7 +30,9 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'lead'], 'string', 'max' => 255],
+            [['title',
+                //'lead',
+                'intro'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,15 +44,18 @@ class Article extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'lead' => 'Lead',
+            //'lead' => 'Lead',
+            'intro' => 'intro',
+
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMailingListEntries()
+    public function getLinksArticlesRelationses()
     {
-        return $this->hasMany(MailingListEntry::class, ['article_id' => 'id']);
+        return $this->hasMany(LinksArticlesRelations::class, ['article_id' => 'id']);
     }
 }
+

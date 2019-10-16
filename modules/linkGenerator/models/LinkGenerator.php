@@ -2,8 +2,6 @@
 
 namespace app\modules\linkGenerator\models;
 
-use app\modules\linkGenerator\models\LinksArticlesRelations;
-use app\models\Articles;
 use Yii;
 
 /**
@@ -37,7 +35,6 @@ class LinkGenerator extends \yii\db\ActiveRecord
             [['title'], 'string'],
             [['status', 'created_at', 'updated_at', 'user_sent', 'user_created'], 'integer'],
             [['send_at'], 'safe'],
-            //[['created_at', 'updated_at', 'user_sent', 'user_created'], 'required'],
         ];
     }
 
@@ -57,8 +54,12 @@ class LinkGenerator extends \yii\db\ActiveRecord
             'user_created' => 'User Created',
         ];
     }
-    public function getLinksArticlesRelations()
+    /**
+ * @return \yii\db\ActiveQuery
+ */
+    public function getLinksArticlesRelationses()
     {
         return $this->hasMany(LinksArticlesRelations::class, ['link_id' => 'id']);
     }
+
 }

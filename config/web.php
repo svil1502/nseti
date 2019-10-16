@@ -23,7 +23,7 @@ $config = [
             'defaultRoute' => 'chat/index',
         ],
         'link-generator' => [
-            'class' => 'app\modules\linkGenerator\LinkGenerator',
+            'class' => 'app\modules\linkGenerator\LinkGeneratorModule',
         //    'defaultRoute' => 'default/index',
         ],
         'mail-list' => [

@@ -3,12 +3,11 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
+/* @var $model app\modules\linkGenerator\models\MailingList */
+/* @var $entries \app\modules\linkGenerator\models\MailingListEntry[] */
 
-/* @var $model app\modules\linkGenerator\models\LinkGenerator */
-/* @var $entries app\modules\linkGenerator\models\LinksArticlesRelations[] */
-
-$this->title = 'Создать рассылку';
-$this->params['breadcrumbs'][] = ['label' => 'Создание рассылки', 'url' => ['index']];
+$this->title = 'Добавить рассылку';
+$this->params['breadcrumbs'][] = ['label' => 'Рассылки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="link-generator-create">

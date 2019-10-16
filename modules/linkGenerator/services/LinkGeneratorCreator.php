@@ -4,13 +4,12 @@ namespace app\modules\linkGenerator\services;
 
 use app\modules\linkGenerator\models\LinkGenerator;
 use app\modules\linkGenerator\models\LinksArticlesRelations;
-
 use Yii;
 
 class LinkGeneratorCreator
 {
     /**
-     * @param LinkGenerator $model
+     * @param MailingList $model
      * @return array
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\db\Exception
@@ -20,14 +19,10 @@ class LinkGeneratorCreator
         $transaction = Yii::$app->db->beginTransaction();
         $post = Yii::$app->request->post();
         $model->load($post);
-      //  $model->created_at = time();
-      //  $model->user_created = Yii::$app->user->identity->id;
-
         if (!$model->save()) {
             $entry_arr = $this->getEntryArr($post, $model);
             return $this->returnError($transaction, $model, $entry_arr);
         }
-        //????
         $entry_arr = $this->getEntryArr($post, $model);
         LinksArticlesRelations::deleteAll(['link_id' => $model->id]);
         $error = false;
@@ -53,7 +48,7 @@ class LinkGeneratorCreator
     {
         foreach ($entry_arr as $entry_model) {
             if (!empty($entry_model->article_id)) {
-                $entry_model->article_arr[$entry_model->article_id] = $entry_model->articles->title;
+                $entry_model->article_arr[$entry_model->article_id] = $entry_model->article->title;
             }
         }
         return $entry_arr;
@@ -61,8 +56,8 @@ class LinkGeneratorCreator
 
     /**
      * @param \yii\db\Transaction $transaction
-     * @param LinkGenerator $model
-     * @param LinksArticlesRelations[] $entry_arr
+     * @param MailingList $model
+     * @param MailingListEntry[] $entry_arr
      * @return array
      */
     private function returnError($transaction, $model, $entry_arr)

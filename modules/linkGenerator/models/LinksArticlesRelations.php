@@ -2,10 +2,8 @@
 
 namespace app\modules\linkGenerator\models;
 
-//use app\modules\linkGenerator\models\Articles;
-use app\models\Articles;
 use Yii;
-
+use app\models\Article;
 /**
  * This is the model class for table "links_articles_relations".
  *
@@ -13,20 +11,10 @@ use Yii;
  * @property int $link_id
  * @property int $article_id
  * @property string $intro
- * @property string $title
- */
-
-
-/**
- * This is the model class for table "mailing_list_entry".
  *
- * @property int $id
- * @property int $mailing_list_id
- * @property int $article_id
- * @property string $lead
- *
- * @property Article $article
- * @property MailingList $mailingList
+ * @property Articles $article
+ * @property LinksArticlesRelations $link
+ * @property LinksArticlesRelations[] $linksArticlesRelations
  */
 class LinksArticlesRelations extends \yii\db\ActiveRecord
 {
@@ -46,8 +34,10 @@ class LinksArticlesRelations extends \yii\db\ActiveRecord
     {
         return [
             [['link_id', 'article_id'], 'integer'],
-            [['intro', 'link_id', 'article_id' ], 'required'],
+            [['link_id', 'article_id', 'intro'], 'required'],
             [['intro'], 'string'],
+        //    [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articles::className(), 'targetAttribute' => ['article_id' => 'id']],
+         //   [['link_id'], 'exist', 'skipOnError' => true, 'targetClass' => LinksArticlesRelations::className(), 'targetAttribute' => ['link_id' => 'id']],
         ];
     }
 
@@ -61,15 +51,15 @@ class LinksArticlesRelations extends \yii\db\ActiveRecord
             'link_id' => 'Link ID',
             'article_id' => 'Article ID',
             'intro' => 'Intro',
-
         ];
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getArticles()
+    public function getArticle()
     {
-        return $this->hasOne(Articles::class, ['id' => 'article_id']);
+        return $this->hasOne(Article::className(), ['id' => 'article_id']);
     }
 
     /**
@@ -77,6 +67,8 @@ class LinksArticlesRelations extends \yii\db\ActiveRecord
      */
     public function getLinkGenerator()
     {
-        return $this->hasOne(LinkGenerator::class, ['id' => 'link_id']);
+        return $this->hasOne(LinkGenerator::className(), ['id' => 'link_id']);
     }
+
+
 }

@@ -2,7 +2,7 @@
 
 namespace app\modules\linkGenerator\controllers;
 
-use app\models\Articles;
+use app\models\Article;
 use app\modules\linkGenerator\models\LinkGenerator;
 use app\modules\linkGenerator\models\LinksArticlesRelations;
 use app\modules\linkGenerator\models\LinkGeneratorSearch;
@@ -73,7 +73,7 @@ class DefaultController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $entries = $this->listCreator->setEntryArr($model->mailingListEntries);
+        $entries = $this->listCreator->setEntryArr($model->linksArticlesRelationses);
         if (Yii::$app->request->isPost) {
             $result = $this->listCreator->create($model);
             if (!$result['error']) {
@@ -98,7 +98,7 @@ class DefaultController extends Controller
     {
         $model = LinkGenerator::find()
             ->alias('ml')
-            ->joinWith('linksArticlesRelations.articles')
+            ->joinWith('linksArticlesRelationses.article')
             ->where(['ml.id' => $id])
             ->one();
         if ($model) {
@@ -111,12 +111,12 @@ class DefaultController extends Controller
      * поиск в select2
      * @return array
      */
-    public function actionSearchArticles()
+    public function actionSearchArticle()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $term = Yii::$app->request->get('term');
         $results = [
-            'results' => Articles::find()
+            'results' => Article::find()
                 ->select(['id', 'title AS text'])
                 ->where(['like', 'title', $term])
                 ->asArray()
@@ -145,12 +145,12 @@ class DefaultController extends Controller
 
     /**
      *  событие change() в select2 - подтягиваем данные для соседних полей по артикулу статьи
-     * @return Articles|array|\yii\db\ActiveRecord|null
+     * @return Article|array|\yii\db\ActiveRecord|null
      */
     public function actionIntroEntry()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $article_id = Yii::$app->request->post('article_id');
-        return Articles::find()->select(['title', 'intro'])->where(['id' => $article_id])->asArray()->one();
+        return Article::find()->select(['title', 'intro'])->where(['id' => $article_id])->asArray()->one();
     }
 }

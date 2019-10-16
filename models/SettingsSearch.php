@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\linkGenerator\models;
+namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\linkGenerator\models\LinkGenerator;
+use app\models\Settings;
 
 /**
- * LinkGeneratorSearch represents the model behind the search form of `app\modules\linkGenerator\models\LinkGenerator`.
+ * SettingsSearch represents the model behind the search form of `app\models\Settings`.
  */
-class LinkGeneratorSearch extends LinkGenerator
+class SettingsSearch extends Settings
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class LinkGeneratorSearch extends LinkGenerator
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at', 'user_sent', 'user_created'], 'integer'],
-            [['title', 'send_at'], 'safe'],
+            [['id'], 'integer'],
+            [['title', 'intro'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class LinkGeneratorSearch extends LinkGenerator
      */
     public function search($params)
     {
-        $query = LinkGenerator::find();
+        $query = Settings::find();
 
         // add conditions that should always apply here
 
@@ -59,15 +59,10 @@ class LinkGeneratorSearch extends LinkGenerator
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
-            'send_at' => $this->send_at,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'user_sent' => $this->user_sent,
-            'user_created' => $this->user_created,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'intro', $this->intro]);
 
         return $dataProvider;
     }

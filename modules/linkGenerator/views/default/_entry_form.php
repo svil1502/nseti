@@ -19,7 +19,7 @@ use yii\helpers\Url;
         <?= $this->render('_form_error', ['model' => $entry, 'field' => 'article_id']) ?>
     </td>
     <td>
-        <?php $value = !empty($entry->article_id) ? $entry->articles->title : null ?>
+        <?php $value = !empty($entry->article_id) ? $entry->article->title : null ?>
         <?= Html::textarea(null, $value, ['readonly' => true, 'class' => 'form-control title-text']) ?>
     </td>
     <td>
