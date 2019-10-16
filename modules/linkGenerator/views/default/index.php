@@ -28,9 +28,3 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
-<?php
-$article_id = 1;
-$s =Article::find()->select(['title', 'intro'])->where(['id' => $article_id])->asArray()->one();
-var_dump($s);
-
-?>
