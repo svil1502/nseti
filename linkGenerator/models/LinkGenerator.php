@@ -33,8 +33,8 @@ class LinkGenerator extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'string'],
-            [['status', 'created_at', 'updated_at', 'user_created', 'send_at'], 'integer'],
-          //  [['send_at'], 'safe'],
+            [['status', 'created_at', 'updated_at', 'user_sent', 'user_created'], 'integer'],
+            [['send_at'], 'safe'],
         ];
     }
 
@@ -45,11 +45,12 @@ class LinkGenerator extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Тема',
-            'status' => 'Статус',
-            'send_at' => 'Дата отправки',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата обновления',
+            'title' => 'Title',
+            'status' => 'Status',
+            'send_at' => 'Send At',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'user_sent' => 'User Sent',
             'user_created' => 'User Created',
         ];
     }

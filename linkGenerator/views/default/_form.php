@@ -7,7 +7,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\linkGenerator\assets\Select2Asset;
-use kartik\datecontrol\DateControl;
 
 Select2Asset::register($this);
 
@@ -73,30 +72,16 @@ $js = "
 ";
 $this->registerJs($js, \yii\web\View::POS_END);
 ?>
+<script>
 
+</script>
 <div class="link-generator-form">
 
     <?= Html::beginForm() ?>
-    
-    <div class="form-group">
-        <?= Html::activeCheckbox($model, 'status', ['label' => 'Статус'], ['class' => 'form-control']) ?>
-        <?= $this->render('_form_error', ['model' => $model, 'field' => 'status']) ?>
-    </div>
 
     <div class="form-group">
-
-        <?=  DateControl::widget([
-                'model' => $model,
-                'attribute' => 'send_at',
-                'type'=>DateControl::FORMAT_DATE,
-                'ajaxConversion'=>false,
-                'widgetOptions' => [
-                'pluginOptions' => [
-                    'autoclose' => true
-                ]
-            ]
-        ]);
-        ?>
+        <?= Html::textInput($model->formName() . '[title]', $model->title, ['class' => 'form-control']) ?>
+        <?= $this->render('_form_error', ['model' => $model, 'field' => 'title']) ?>
     </div>
 
     <table class="table table-bordered">

@@ -24,14 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            [
-                'attribute' => 'status',
-                'value' => function($data) {
-                    return !$data->status ? '<span class="text-danger">Нет</span>' : '<span class="text-success">Да</span>';
-                },
-                'format' => 'html',
-            ],
-            'send_at:date',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

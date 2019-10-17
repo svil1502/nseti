@@ -22,7 +22,6 @@ class DefaultController extends Controller
     {
         parent::__construct($id, $module);
         $this->listCreator = $listCreator;
-
     }
 
     public function behaviors()
@@ -62,21 +61,19 @@ class DefaultController extends Controller
         $entries = [new LinksArticlesRelations()];
         if (Yii::$app->request->isPost) {
             $result = $this->listCreator->create($model);
-
             if (!$result['error']) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
             $model = $result['model'];
             $entries = $result['entries'];
         }
-        return $this->render('create', compact('model', 'entries', 'result'));
+        return $this->render('create', compact('model', 'entries'));
     }
 
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
         $entries = $this->listCreator->setEntryArr($model->linksArticlesRelationses);
-
         if (Yii::$app->request->isPost) {
             $result = $this->listCreator->create($model);
             if (!$result['error']) {
@@ -86,7 +83,7 @@ class DefaultController extends Controller
             $entries = $result['entries'];
         }
 
-        return $this->render('update', compact('model', 'entries', 'result'));
+        return $this->render('update', compact('model', 'entries'));
     }
 
 

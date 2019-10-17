@@ -12,5 +12,5 @@ $this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="link-generator-update">
     <h1><?= Html::encode($this->title) ?></h1>
-    <?= $this->render('_form', compact('model', 'entries', 'result')) ?>
+    <?= $this->render('_form', compact('model', 'entries')) ?>
 </div>

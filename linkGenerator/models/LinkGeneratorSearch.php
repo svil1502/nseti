@@ -17,7 +17,7 @@ class LinkGeneratorSearch extends LinkGenerator
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at', 'user_created',  'send_at'], 'integer'],
+            [['id', 'status', 'created_at', 'updated_at', 'user_sent', 'user_created'], 'integer'],
             [['title', 'send_at'], 'safe'],
         ];
     }
@@ -63,6 +63,7 @@ class LinkGeneratorSearch extends LinkGenerator
             'send_at' => $this->send_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'user_sent' => $this->user_sent,
             'user_created' => $this->user_created,
         ]);
 

@@ -18,11 +18,7 @@ class LinkGeneratorCreator
     {
         $transaction = Yii::$app->db->beginTransaction();
         $post = Yii::$app->request->post();
-
         $model->load($post);
-//        $data = Yii::$app->request->post();
-//        $model->send_at = $data['WorkAllocation']['allocation_datetime'];
-//        $model->save();
         if (!$model->save()) {
             $entry_arr = $this->getEntryArr($post, $model);
             return $this->returnError($transaction, $model, $entry_arr);
