@@ -26,8 +26,8 @@
         "kartik-v/yii2-datecontrol": "^1.9@dev",
         "kartik-v/yii2-widget-select2": "@dev",
         "unclead/yii2-multiple-input": "~2.0",
-        "kartik-v/yii2-datecontrol": "^1.9@dev",
-        "kartik-v/yii2-widget-datetimepicker": "dev-master"
+        "2amigos/yii2-date-picker-widget": "~1.0",
+        "2amigos/yii2-date-time-picker-widget": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

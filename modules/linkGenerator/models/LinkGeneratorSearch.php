@@ -17,8 +17,8 @@ class LinkGeneratorSearch extends LinkGenerator
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at', 'user_created',  'send_at'], 'integer'],
-            [['title', 'send_at'], 'safe'],
+            [['id', 'status', 'user_created'], 'integer'],
+            [['title', 'send_at', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 

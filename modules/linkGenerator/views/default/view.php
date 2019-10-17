@@ -38,7 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'html',
             ],
-            'send_at',
+            'send_at:date',
+            'created_at:date',
+            'updated_at:date',
         ],
     ]) ?>
 

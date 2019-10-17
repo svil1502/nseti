@@ -3,7 +3,7 @@
 namespace app\modules\linkGenerator\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "link_generator".
  *
@@ -18,6 +18,7 @@ use Yii;
  */
 class LinkGenerator extends \yii\db\ActiveRecord
 {
+    public $sendAtTime;
     /**
      * {@inheritdoc}
      */
@@ -26,6 +27,12 @@ class LinkGenerator extends \yii\db\ActiveRecord
         return 'link_generator';
     }
 
+//    public function behaviors()
+//    {
+//        return [
+//            TimestampBehavior::className(),
+//        ];
+//    }
     /**
      * {@inheritdoc}
      */
@@ -33,8 +40,8 @@ class LinkGenerator extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'string'],
-            [['status', 'created_at', 'updated_at', 'user_created', 'send_at'], 'integer'],
-          //  [['send_at'], 'safe'],
+            [['status', 'user_created'], 'integer'],
+            [['send_at', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -51,6 +58,7 @@ class LinkGenerator extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
             'user_created' => 'User Created',
+            'sendAtTime' => 'Время отправки',
         ];
     }
     /**

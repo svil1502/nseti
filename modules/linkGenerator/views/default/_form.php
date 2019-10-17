@@ -7,7 +7,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\linkGenerator\assets\Select2Asset;
-use kartik\datecontrol\DateControl;
+
+use dosamigos\datetimepicker\DateTimePicker;
 
 Select2Asset::register($this);
 
@@ -77,26 +78,32 @@ $this->registerJs($js, \yii\web\View::POS_END);
 <div class="link-generator-form">
 
     <?= Html::beginForm() ?>
-    
+
     <div class="form-group">
         <?= Html::activeCheckbox($model, 'status', ['label' => 'Статус'], ['class' => 'form-control']) ?>
         <?= $this->render('_form_error', ['model' => $model, 'field' => 'status']) ?>
     </div>
-
+    <?php
+    if($model->send_at){
+        $unixtime = strtotime($model->send_at);
+        $date = date('Y-m-d', $unixtime);
+        $time = date('H:i:s', $unixtime);
+        $model->send_at = date('Y-m-d', strtotime($model->send_at));
+        $model->sendAtTime = $time;
+    }
+    ?>
     <div class="form-group">
-
-        <?=  DateControl::widget([
-                'model' => $model,
-                'attribute' => 'send_at',
-                'type'=>DateControl::FORMAT_DATE,
-                'ajaxConversion'=>false,
-                'widgetOptions' => [
-                'pluginOptions' => [
-                    'autoclose' => true
-                ]
+        <?= DateTimePicker::widget([
+            'model' => $model,
+            'attribute' => 'send_at',
+            'clientOptions' => [
+                'weekStart' => 1,
+                'minView' => 3,
+                'steps' => 60,
+                'format' => 'yyyy-mm-dd',
             ]
-        ]);
-        ?>
+        ]) ?>
+
     </div>
 
     <table class="table table-bordered">
