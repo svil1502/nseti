@@ -4,6 +4,9 @@ namespace app\modules\linkGenerator\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use app\models\User;
+use app\models\ArticlesCategories;
+use app\models\Articles;
 /**
  * This is the model class for table "link_generator".
  *
@@ -58,6 +61,7 @@ class LinkGenerator extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
             'user_created' => 'User Created',
+            'UsersName' => 'Создатель рассылки',
             'sendAtTime' => 'Время отправки',
         ];
     }
@@ -68,5 +72,35 @@ class LinkGenerator extends \yii\db\ActiveRecord
     {
         return $this->hasMany(LinksArticlesRelations::class, ['link_id' => 'id']);
     }
+
+    public function getUsers()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_created']);
+    }
+
+    /* Геттер для наименования user */
+    public function getUsersName() {
+        return $this->Users->display_name;
+
+    }
+//    public function getArticlesCategories() {
+//
+//        return $this->hasMany(ArticlesCategories::className(), ['id' => 'category_id'])
+//            ->viaTable(
+//                'Article',
+//                ['id' => 'links_articles_relations.article_id'],
+//                function ($query) {
+//                    $query->andWhere(['articles_categories.article_id' => 'article.id']);
+//                })
+//            ->viaTable(
+//                'LinksArticlesRelations',
+//                ['link_id' => 'link_generator.id'],
+//                function ($query) {
+//                    $query->andWhere(['link_generator.id' => 'links_articles_relations.link_id']);
+//                });
+//
+//
+//    }
+
 
 }

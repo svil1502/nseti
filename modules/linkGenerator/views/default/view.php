@@ -41,6 +41,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'send_at:date',
             'created_at:date',
             'updated_at:date',
+           // 'user_created',
+
+            [
+                'attribute' => 'UsersName',
+                'value' => function($model) {
+                    return $model->users->display_name;
+                },
+                'format' => 'html',
+            ],
         ],
     ]) ?>
 

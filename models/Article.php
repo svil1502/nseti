@@ -4,6 +4,7 @@ namespace app\models;
 
 
 use app\modules\mailList\models\LinksArticlesRelations;
+use app\modules\mailList\models\LinkGenerator;
 
 /**
  * This is the model class for table "articles".
@@ -44,6 +45,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'category_id' => 'Категория',
             //'lead' => 'Lead',
             'intro' => 'intro',
 
@@ -56,6 +58,16 @@ class Article extends \yii\db\ActiveRecord
     public function getLinksArticlesRelationses()
     {
         return $this->hasMany(LinksArticlesRelations::class, ['article_id' => 'id']);
+          //  ->with(['linkGenerator']);
+    }
+    public function getArticlesCategories()
+    {
+        return $this->hasOne(ArticlesCategories::className(), ['id' => 'category_id']);
+    }
+
+    /* Геттер для наименования категории */
+    public function getArticlesCategoriesName() {
+        return $this->ArticlesCategories->title;
     }
 }
 

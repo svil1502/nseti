@@ -20,15 +20,19 @@ class LinkGeneratorCreator
         $post = Yii::$app->request->post();
 
         $model->load($post);
-//        $data = Yii::$app->request->post();
-//        $model->send_at = $data['WorkAllocation']['allocation_datetime'];
-//        $model->save();
+
+        $model->user_created = Yii::$app->user->identity->id;
+
+       //$model->save();
         if (!$model->save()) {
             $entry_arr = $this->getEntryArr($post, $model);
             return $this->returnError($transaction, $model, $entry_arr);
         }
+
         $entry_arr = $this->getEntryArr($post, $model);
+
         LinksArticlesRelations::deleteAll(['link_id' => $model->id]);
+
         $error = false;
         foreach ($entry_arr as $item) {
             if (!$item->save()) {
@@ -38,7 +42,10 @@ class LinkGeneratorCreator
         if ($error) {
             return $this->returnError($transaction, $model, $entry_arr);
         }
+
         $transaction->commit();
+        $model->title = $model->linksArticlesRelationses[0]->article->articlesCategories->title. " " . date_create('now')->format('d-m-Y');
+        $model->save();
         return [
             'error' => $error
         ];

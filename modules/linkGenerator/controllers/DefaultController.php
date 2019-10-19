@@ -101,12 +101,13 @@ class DefaultController extends Controller
     {
         $model = LinkGenerator::find()
             ->alias('ml')
-            ->joinWith('linksArticlesRelationses.article')
+            ->joinWith('linksArticlesRelationses.article.articlesCategories')
             ->where(['ml.id' => $id])
             ->one();
         if ($model) {
             return $model;
         }
+
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 

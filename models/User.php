@@ -158,6 +158,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'ПолноеНаименование' => 'username',
             'Фамилия' => 'username',
             'Имя' => 'username',
+            'Ник' => 'display_name',
         ];
     }
 }
